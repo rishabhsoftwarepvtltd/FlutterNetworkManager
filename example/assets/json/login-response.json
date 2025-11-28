@@ -1,0 +1,15 @@
+{
+    "message": "Login is successful.",
+    "data": [
+        {
+            "access_token": "access-token-abced1234",
+            "expires_in": 0,
+            "refresh_expires_in": 0,
+            "refresh_token": "refresh-token-abced1234",
+            "token_type": "string",
+            "not-before-policy": 0,
+            "session_state": "string",
+            "scope": "string"
+        }
+    ]
+}
