@@ -17,9 +17,6 @@ dependencies:
   dio_smart_retry: ^7.0.1
   connectivity_plus: ^7.0.0
 
-dependency_overrides:
-  win32: ^5.5.0
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
