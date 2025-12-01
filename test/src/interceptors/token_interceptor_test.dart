@@ -19,7 +19,7 @@ void main() {
   });
   group("tokenInterceptor", () {
     test(
-      "Authentication non-exempt request should have token in header",
+      "onRequest_whenNonExemptRequest_shouldAddTokenToHeader",
       () async {
         const String tokenValue = "token123#";
         when(() => mockFlutterSecureStorage.read(key: PersisterKeys.token))
@@ -40,7 +40,7 @@ void main() {
         expect(authValue, "Bearer $tokenValue");
       },
     );
-    test("Authentication exempt request should not have token in header",
+    test("onRequest_whenExemptRequest_shouldNotAddTokenToHeader",
         () async {
       final dioClient = const DioFactory("").create();
       dioClient.interceptors.add(
