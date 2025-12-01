@@ -13,7 +13,7 @@
 Do **not** open a public GitHub issue.
 
 Please report privately to:
-📧 **techsupport@rishabhsoft.com** 
+📧 **opensource@rishabhsoft.com** 
 
 Include:
 - Description
