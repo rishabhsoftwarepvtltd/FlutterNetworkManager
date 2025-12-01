@@ -58,7 +58,7 @@ Add the dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  rspl_network_manager: ^1.0.0
+  rspl_network_manager: ^0.0.1
 ```
 
 Then run:
