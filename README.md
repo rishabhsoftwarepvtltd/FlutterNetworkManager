@@ -158,6 +158,18 @@ rspl_network_manager/
 
 For a complete example, including login, profile fetching, and token refresh, see the [example](example) directory.
 
+> **Note:**  
+> The example app uses a public mock API with demo login credentials:
+> ```json
+> {
+>   "email": "john@mail.com",
+>   "password": "changeme"
+> }
+> ```
+> These credentials are provided by the Platzi Fake API and may change over time.  
+> If the example app throws authentication or API errors, verify the latest valid credentials on the official API documentation:  
+> **https://fakeapi.platzi.com/en/rest/auth-jwt/**
+
 ## Contributing
 
 Contributions welcome! Please read:
