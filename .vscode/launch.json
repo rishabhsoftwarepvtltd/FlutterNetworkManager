@@ -9,7 +9,7 @@
             "cwd": "example",
             "request": "launch",
             "type": "dart",
-            "program": "./lib/app/main.dart"
+            "program": "./lib/main.dart"
         },
         {
             "name": "example (profile mode)",
