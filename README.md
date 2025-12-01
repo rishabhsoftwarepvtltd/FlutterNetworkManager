@@ -1,14 +1,33 @@
 # RSPL Network Manager
 
+[![pub package](https://img.shields.io/pub/v/rspl_network_manager.svg)](https://pub.dev/packages/rspl_network_manager)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 `RSPLNetworkManager` is a production-ready networking wrapper for Flutter apps, built on top of Dio. It simplifies HTTP requests with built-in logging, token management, offline support, and automatic token refreshing.
 
+It abstracts away common boilerplate code associated with HTTP clients, offering a clean API for handling authentication, logging, error handling, and connectivity states. It is designed to be modular and easily extensible.
+
+## Table of Contents
+
+- [Features](#features)
+- [Platform Support](#platform-support)
+- [Requirements](#requirements)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Folder Structure](#folder-structure)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Features
-- **Configurable Logging**: Detailed logs of web-service calls with optional file output.
-- **Token Management**: Seamless token persistence and automatic injection into requests.
-- **Offline Support**: Mock API interceptor for development and testing without a backend.
-- **Automatic Refresh**: Built-in mechanism to refresh expired access tokens automatically.
-- **Connectivity Checks**: Automatically checks for internet connection before making requests.
-- **Proxy Support**: Easy configuration for proxy settings during debugging.
+
+- 📝 **Configurable Logging**: Debug your network traffic with ease using configurable logging levels (request/response headers, body, errors).
+- 🔐 **Secure Token Storage**: Seamless token persistence using `flutter_secure_storage` with automatic injection into requests.
+- 🔄 **Auto Token Refresh**: Built-in mechanism to handle 401 errors and refresh expired access tokens automatically.
+- 🛠️ **Mock API Support**: Develop faster by mocking API responses when the backend isn't ready.
+- 📡 **Connectivity Awareness**: Automatically checks for internet connection before making requests to prevent unnecessary failures.
+- 🔌 **Proxy Support**: Easy configuration for proxy settings during debugging.
+- 🧪 **Testable**: Designed with dependency injection in mind, making it easy to unit test your networking logic.
 
 ## Platform Support
 
@@ -25,39 +44,21 @@
 - **Flutter**: Flutter 3.24.0+
 - **Dio**: ^5.0.0
 
-## Permissions Required
+### Permissions
 
-- **Android**: `INTERNET` permission in `AndroidManifest.xml`
-- **iOS**: No explicit permissions required for basic networking
-- **macOS**: `com.apple.security.network.client` entitlement
-
-## Description
-
-`RSPLNetworkManager` provides a robust networking layer for Flutter applications. It abstracts away common boilerplate code associated with HTTP clients, offering a clean API for handling authentication, logging, error handling, and connectivity states. It is designed to be modular and easily extensible.
-
-## Highlights / Features
-
-• 📝 ** comprehensive Logging**: Debug your network traffic with ease using configurable logging levels.
-
-• 🔐 **Secure Token Storage**: Abstracted token persistence with a default secure storage implementation.
-
-• 🔄 **Auto Token Refresh**: Never worry about expired tokens again with the built-in refresh interceptor.
-
-• 🛠️ **Mock API Support**: Develop faster by mocking API responses when the backend isn't ready.
-
-• 📡 **Connectivity Awareness**: Prevent failed requests by checking network status beforehand.
-
-• 🧪 **Testable**: Designed with dependency injection in mind, making it easy to unit test your networking logic.
+- **Android**: Add `INTERNET` permission in `AndroidManifest.xml`.
+- **iOS**: No explicit permissions required for basic networking.
+- **macOS**: Add `com.apple.security.network.client` entitlement.
 
 ## Getting Started
 
-### 1) Install
+### 1. Install
 
 Add the dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  rspl_network_manager: ^1.0.11
+  rspl_network_manager: ^1.0.0
 ```
 
 Then run:
@@ -66,7 +67,7 @@ Then run:
 flutter pub get
 ```
 
-### 2) Import
+### 2. Import
 
 ```dart
 import 'package:rspl_network_manager/rspl_network_manager.dart';
@@ -135,7 +136,7 @@ void main() {
 ```
 rspl_network_manager/
 ├─ lib/
-│  ├─ rspl_network_manager.dart           # Main package export
+│  ├─ rspl_network_manager.dart   # Main package export
 │  └─ src/
 │     ├─ dio_factory.dart         # Dio instance creator
 │     ├─ interceptors/            # Network interceptors
@@ -144,7 +145,7 @@ rspl_network_manager/
 │     │  └─ ...
 │     ├─ token/                   # Token management
 │     │  ├─ token_persister.dart
-│     │  └─ token_refresher.dart
+│     │  ├─ token_refresher.dart
 │     └─ ...
 ├─ example/                       # Complete example app
 ├─ test/                          # Unit tests
@@ -161,35 +162,26 @@ For a complete example, including login, profile fetching, and token refresh, se
 
 Contributions welcome! Please read:
 
-• [CONTRIBUTING.md](CONTRIBUTING.md) – setup, branch strategy, commit convention
+- [CONTRIBUTING.md](CONTRIBUTING.md) – setup, branch strategy, commit convention
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
-• [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
-
-• Run checks before push:
-  - `dart format .`
-  - `flutter analyze`
-  - `flutter test`
-
-## Changelog
-
-See [CHANGELOG.md](CHANGELOG.md).
+Run checks before push:
+- `dart format .`
+- `flutter analyze`
+- `flutter test`
 
 ## User Privacy Notes
 
-• This package does not collect any user information or share data with third-party services.
+- This package does not collect any user information or share data with third-party services.
 
 ## Author, Maintainers & Acknowledgements
 
-• Developed by **Rishabh Software**.
-• Thanks to the Flutter community for the amazing packages used in this project.
-
-## Keywords and Tags
-
-flutter dart networking dio http api token-refresh logging interceptor connectivity offline-support
+- Developed by **Rishabh Software**.
+- Thanks to the Flutter community for the amazing packages used in this project.
 
 ## License
 
-This package is licensed under the MIT License.
+This package is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
 ## Made by RSPL Team
 
