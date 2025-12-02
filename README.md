@@ -15,6 +15,7 @@ It abstracts away common boilerplate code associated with HTTP clients, offering
 - [Features](#features)
 - [Platform Support](#platform-support)
 - [Requirements](#requirements)
+- [Dependencies & Configuration](#dependencies--configuration)
 - [Getting Started](#getting-started)
 - [Detailed Usage](#detailed-usage)
   - [1. Creating a Client (DioFactory)](#1-creating-a-client-diofactory)
@@ -60,6 +61,30 @@ It abstracts away common boilerplate code associated with HTTP clients, offering
 - **Android**: Add `INTERNET` permission in `AndroidManifest.xml`.
 - **iOS**: No explicit permissions required for basic networking.
 - **macOS**: Add `com.apple.security.network.client` entitlement.
+
+## Dependencies & Configuration
+
+This package relies on the following core dependencies. Please review their documentation for any specific platform configurations:
+
+| Package | Purpose |
+|---------|---------|
+| [dio](https://pub.dev/packages/dio) | Core HTTP client for making network requests. |
+| [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage) | Secure storage for persisting authentication tokens. |
+| [dio_smart_retry](https://pub.dev/packages/dio_smart_retry) | Flexible retry logic for failed requests. |
+| [connectivity_plus](https://pub.dev/packages/connectivity_plus) | Network connectivity detection. |
+
+### Important Configuration Notes
+
+#### flutter_secure_storage
+- **Linux**: Requires `libsecret-1-dev` and `libjsoncpp-dev`.
+- **macOS**: You must add the `Keychain Sharing` capability in Xcode and enable `keychain-access-groups` in your entitlements file (as shown in the example app).
+- **Android**: Can be configured to use `EncryptedSharedPreferences`.
+
+#### connectivity_plus
+- **Android**: Uses `ConnectivityManager`. Ensure `ACCESS_NETWORK_STATE` permission is in your manifest (usually added automatically).
+- **iOS/macOS**: Uses `NWPathMonitor`. No extra configuration needed for basic usage.
+
+
 
 ## Getting Started
 
