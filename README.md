@@ -4,7 +4,7 @@
 [![Flutter](https://img.shields.io/badge/Flutter-3.24.0%2B-02569B.svg?logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.5.0%2B-0175C2.svg?logo=dart&logoColor=white)](https://dart.dev)
 [![Coverage](https://img.shields.io/badge/coverage-87%25-success.svg)](https://github.com/rishabhsoftwarepvtltd/FlutterNetworkManager)
-[![Platform](https://img.shields.io/badge/platform-android%20|%20ios%20|%20macos%20|%20windows%20|%20web-blue.svg)](https://pub.dev/packages/rspl_network_manager)
+[![Platform](https://img.shields.io/badge/platform-android%20|%20ios%20|%20macos%20|%20web-blue.svg)](https://pub.dev/packages/rspl_network_manager)
 
 `RSPLNetworkManager` is a production-ready networking wrapper for Flutter apps, built on top of [Dio](https://pub.dev/packages/dio). It simplifies HTTP requests with built-in logging, token management, offline support, and automatic token refreshing.
 
@@ -46,7 +46,6 @@ It abstracts away common boilerplate code associated with HTTP clients, offering
 - **Android** — API Level: 21+
 - **iOS** — iOS 12.0+
 - **macOS** — macOS 10.14+
-- **Windows** — Windows 10+
 - **Web** — All modern browsers
 
 ## Requirements
