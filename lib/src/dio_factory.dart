@@ -26,6 +26,8 @@ class DioFactory {
   ///
   /// Optionally accepts custom [headers] and [proxyConfig] for proxy setup.
   /// Returns a fully configured [Dio] client ready for HTTP requests.
+  ///
+  /// Note: [proxyConfig] is only supported on non-web platforms.
   Dio create({Map<String, dynamic>? headers, ProxyConfig? proxyConfig}) {
     final baseOptions = _createBaseOptions();
     if (headers != null) {

@@ -48,6 +48,9 @@ It abstracts away common boilerplate code associated with HTTP clients, offering
 - **macOS** — macOS 10.14+
 - **Web** — All modern browsers
 
+> [!NOTE]
+> **Proxy configuration is not supported on web**. The `proxyConfig` parameter in `DioFactory.create()` will be ignored when running on web platforms.
+
 ## Requirements
 
 - **Dart**: >=3.5.0 <4.0.0
@@ -331,6 +334,9 @@ final dio = dioFactory.create(
 );
 ```
 
+> [!WARNING]
+> **Proxy configuration is not supported on web platforms.** The `proxyConfig` parameter will be ignored when running on web. Proxy support is only available on Android, iOS, and macOS.
+
 > **Note**: Ensure your device and computer are on the same Wi-Fi network.
 
 #### Custom Timeouts
@@ -404,7 +410,7 @@ Run checks before push:
 
 ## Author, Maintainers & Acknowledgements
 
-- Developed by **Rishabh Software**.
+- Developed by **[Rishabh Software](https://www.rishabhsoft.com/)**.
 - Thanks to the Flutter community for the amazing packages used in this project.
 
 ## License
@@ -413,4 +419,4 @@ This package is licensed under the MIT License. See [LICENSE](LICENSE) for detai
 
 ## Made by RSPL Team
 
-[Github](https://github.com/rishabhsoftwarepvtltd) • [Website](https://www.rishabhsoft.com)
+[Github](https://github.com/rishabhsoftwarepvtltd) • [Website](https://www.rishabhsoft.com/services/mobile-app-development)
