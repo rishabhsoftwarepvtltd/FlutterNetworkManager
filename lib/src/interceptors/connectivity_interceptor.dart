@@ -27,7 +27,7 @@ class ConnectivityInterceptor extends Interceptor {
     _connectivity = connectivity ?? Connectivity();
     _listenConnectionStatus();
   }
-  
+
   late final Connectivity _connectivity;
   late final StreamSubscription<List<ConnectivityResult>> subscription;
   ConnectivityResult? _connectionResult;

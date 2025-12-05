@@ -40,8 +40,7 @@ void main() {
         expect(authValue, "Bearer $tokenValue");
       },
     );
-    test("onRequest_whenExemptRequest_shouldNotAddTokenToHeader",
-        () async {
+    test("onRequest_whenExemptRequest_shouldNotAddTokenToHeader", () async {
       final dioClient = const DioFactory("").create();
       dioClient.interceptors.add(
         TokenInterceptor(

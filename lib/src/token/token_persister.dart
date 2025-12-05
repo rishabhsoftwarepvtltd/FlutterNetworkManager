@@ -4,7 +4,7 @@ abstract class ITokenWriter {
   ///
   /// Either [token] or [refreshToken] can be null if only one needs to be updated.
   Future<void> save({String? token, String? refreshToken});
-  
+
   /// Removes all stored tokens from secure storage.
   Future<void> remove();
 }
@@ -15,7 +15,7 @@ abstract class ITokenReader {
   ///
   /// Returns `null` if no token is stored.
   Future<String?> get token;
-  
+
   /// Retrieves the refresh token from secure storage.
   ///
   /// Returns `null` if no refresh token is stored.
@@ -25,7 +25,7 @@ abstract class ITokenReader {
 /// Combined interface for reading and writing authentication tokens.
 ///
 /// Implementations should use secure storage mechanisms like
-/// [KeyChainTokenPersister] which uses [FlutterSecureStorage].
+/// [KeyChainTokenPersister] which uses flutter_secure_storage.
 ///
 /// Example implementation:
 /// ```dart

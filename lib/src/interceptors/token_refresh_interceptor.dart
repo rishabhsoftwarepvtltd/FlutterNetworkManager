@@ -53,10 +53,10 @@ class TokenRefreshInterceptorWrapper {
       retryEvaluator: _retryEvaluator,
     );
   }
-  
+
   /// The token refresher implementation.
   ITokenRefresher tokenRefresher;
-  
+
   late RetryEvaluator _retryEvaluator;
   late final Interceptor _retryInterceptor;
 

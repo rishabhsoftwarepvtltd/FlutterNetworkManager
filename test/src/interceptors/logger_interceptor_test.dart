@@ -3,11 +3,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:rspl_network_manager/src/interceptors/logger_interceptor.dart';
 
-class MockRequestInterceptorHandler extends Mock implements RequestInterceptorHandler {}
+class MockRequestInterceptorHandler extends Mock
+    implements RequestInterceptorHandler {}
 
-class MockResponseInterceptorHandler extends Mock implements ResponseInterceptorHandler {}
+class MockResponseInterceptorHandler extends Mock
+    implements ResponseInterceptorHandler {}
 
-class MockErrorInterceptorHandler extends Mock implements ErrorInterceptorHandler {}
+class MockErrorInterceptorHandler extends Mock
+    implements ErrorInterceptorHandler {}
 
 void main() {
   setUpAll(() {

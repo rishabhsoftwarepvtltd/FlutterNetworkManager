@@ -33,7 +33,7 @@ class TokenInterceptor extends Interceptor {
 
   /// Token persister for retrieving the access token.
   final ITokenPersister tokenPersister;
-  
+
   /// List of API paths that should not have authentication tokens added.
   final List<String> exceptionList;
 

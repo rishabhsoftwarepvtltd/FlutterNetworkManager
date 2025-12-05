@@ -8,7 +8,8 @@ import 'package:rspl_network_manager/src/interceptors/connectivity_interceptor.d
 
 class MockConnectivity extends Mock implements Connectivity {}
 
-class MockRequestInterceptorHandler extends Mock implements RequestInterceptorHandler {}
+class MockRequestInterceptorHandler extends Mock
+    implements RequestInterceptorHandler {}
 
 void main() {
   late MockConnectivity mockConnectivity;
@@ -23,7 +24,8 @@ void main() {
 
   setUp(() {
     mockConnectivity = MockConnectivity();
-    connectivityController = StreamController<List<ConnectivityResult>>.broadcast();
+    connectivityController =
+        StreamController<List<ConnectivityResult>>.broadcast();
 
     when(() => mockConnectivity.onConnectivityChanged)
         .thenAnswer((_) => connectivityController.stream);
@@ -35,7 +37,8 @@ void main() {
 
   group('ConnectivityInterceptor', () {
     test('onRequest_whenConnectivityAvailable_shouldAllowRequest', () async {
-      final interceptor = ConnectivityInterceptor(connectivity: mockConnectivity);
+      final interceptor =
+          ConnectivityInterceptor(connectivity: mockConnectivity);
       final handler = MockRequestInterceptorHandler();
       final options = RequestOptions(path: '/test');
 
@@ -55,7 +58,8 @@ void main() {
     });
 
     test('onRequest_whenNoConnectivity_shouldRejectRequest', () async {
-      final interceptor = ConnectivityInterceptor(connectivity: mockConnectivity);
+      final interceptor =
+          ConnectivityInterceptor(connectivity: mockConnectivity);
       final handler = MockRequestInterceptorHandler();
       final options = RequestOptions(path: '/test');
 
@@ -78,7 +82,8 @@ void main() {
     });
 
     test('onRequest_whenConnectivityStatusNull_shouldAllowRequest', () {
-      final interceptor = ConnectivityInterceptor(connectivity: mockConnectivity);
+      final interceptor =
+          ConnectivityInterceptor(connectivity: mockConnectivity);
       final handler = MockRequestInterceptorHandler();
       final options = RequestOptions(path: '/test');
 
@@ -94,7 +99,8 @@ void main() {
     });
 
     test('onRequest_whenConnectionChanges_shouldUpdateStatus', () async {
-      final interceptor = ConnectivityInterceptor(connectivity: mockConnectivity);
+      final interceptor =
+          ConnectivityInterceptor(connectivity: mockConnectivity);
       final handler = MockRequestInterceptorHandler();
       final options = RequestOptions(path: '/test');
 
@@ -116,7 +122,8 @@ void main() {
     });
 
     test('onRequest_whenMobileConnectivity_shouldAllowRequest', () async {
-      final interceptor = ConnectivityInterceptor(connectivity: mockConnectivity);
+      final interceptor =
+          ConnectivityInterceptor(connectivity: mockConnectivity);
       final handler = MockRequestInterceptorHandler();
       final options = RequestOptions(path: '/test');
 
@@ -134,7 +141,8 @@ void main() {
     });
 
     test('onRequest_whenEthernetConnectivity_shouldAllowRequest', () async {
-      final interceptor = ConnectivityInterceptor(connectivity: mockConnectivity);
+      final interceptor =
+          ConnectivityInterceptor(connectivity: mockConnectivity);
       final handler = MockRequestInterceptorHandler();
       final options = RequestOptions(path: '/test');
 

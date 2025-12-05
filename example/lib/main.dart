@@ -128,7 +128,8 @@ class _JWTDemoPageState extends State<JWTDemoPage> {
 
         // Don't retry login or refresh endpoints (prevents infinite loops)
         final path = error.requestOptions.path;
-        if (path.contains('/auth/login') || path.contains('/auth/refresh-token')) {
+        if (path.contains('/auth/login') ||
+            path.contains('/auth/refresh-token')) {
           return false;
         }
 
@@ -263,7 +264,8 @@ class _JWTDemoPageState extends State<JWTDemoPage> {
       refreshToken: currentRefreshToken,
     );
 
-    _addLog('Access token expired! Next request will trigger refresh.', LogType.warning);
+    _addLog('Access token expired! Next request will trigger refresh.',
+        LogType.warning);
   }
 
   /// Logout and clear tokens
@@ -427,7 +429,8 @@ class _JWTDemoPageState extends State<JWTDemoPage> {
                     children: [
                       CircleAvatar(
                         radius: 30,
-                        backgroundImage: NetworkImage(_profileData!['avatar'] ?? ''),
+                        backgroundImage:
+                            NetworkImage(_profileData!['avatar'] ?? ''),
                         backgroundColor: Colors.grey.shade300,
                       ),
                       const SizedBox(width: 12),
@@ -520,7 +523,8 @@ class _JWTDemoPageState extends State<JWTDemoPage> {
                   label: const Text('Clear'),
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.red,
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   ),
                 ),
               ],
@@ -714,7 +718,7 @@ class _CustomTokenRefresher implements ITokenRefresher {
       rethrow;
     } on DioException catch (e) {
       onLog('Token refresh failed: ${e.message}', LogType.error);
-      
+
       // Determine the failure reason based on the error
       RefreshFailureReason reason;
       if (e.response?.statusCode == 401 || e.response?.statusCode == 403) {

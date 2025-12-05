@@ -13,13 +13,15 @@ void main() {
   });
 
   group('TokenRetryEvaluator', () {
-    test('evaluate_whenStatusCodeMatchesAndRefreshSucceeds_shouldReturnTrue', () async {
+    test('evaluate_whenStatusCodeMatchesAndRefreshSucceeds_shouldReturnTrue',
+        () async {
       final evaluator = TokenRetryEvaluator(
         tokenRefresher: mockTokenRefresher,
         retryCodes: [401, 403],
       );
 
-      when(() => mockTokenRefresher.refreshToken()).thenAnswer((_) async => true);
+      when(() => mockTokenRefresher.refreshToken())
+          .thenAnswer((_) async => true);
 
       final exception = DioException(
         requestOptions: RequestOptions(path: '/test'),
@@ -36,13 +38,15 @@ void main() {
       verify(() => mockTokenRefresher.refreshToken()).called(1);
     });
 
-    test('evaluate_whenStatusCodeMatchesButRefreshFails_shouldReturnFalse', () async {
+    test('evaluate_whenStatusCodeMatchesButRefreshFails_shouldReturnFalse',
+        () async {
       final evaluator = TokenRetryEvaluator(
         tokenRefresher: mockTokenRefresher,
         retryCodes: [401],
       );
 
-      when(() => mockTokenRefresher.refreshToken()).thenAnswer((_) async => false);
+      when(() => mockTokenRefresher.refreshToken())
+          .thenAnswer((_) async => false);
 
       final exception = DioException(
         requestOptions: RequestOptions(path: '/test'),
@@ -189,7 +193,8 @@ void main() {
         exceptionalUris: ['/auth/*'],
       );
 
-      when(() => mockTokenRefresher.refreshToken()).thenAnswer((_) async => false);
+      when(() => mockTokenRefresher.refreshToken())
+          .thenAnswer((_) async => false);
 
       final exception = DioException(
         requestOptions: RequestOptions(path: '/auth/login'),
@@ -205,7 +210,8 @@ void main() {
       expect(result, isFalse);
     });
 
-    test('evaluate_whenRefresherThrowsException_shouldPropagateException', () async {
+    test('evaluate_whenRefresherThrowsException_shouldPropagateException',
+        () async {
       final evaluator = TokenRetryEvaluator(
         tokenRefresher: mockTokenRefresher,
         retryCodes: [401],
@@ -232,7 +238,9 @@ void main() {
       );
     });
 
-    test('evaluate_whenRefresherThrowsTokenRefreshFailedException_shouldPropagate', () async {
+    test(
+        'evaluate_whenRefresherThrowsTokenRefreshFailedException_shouldPropagate',
+        () async {
       final evaluator = TokenRetryEvaluator(
         tokenRefresher: mockTokenRefresher,
         retryCodes: [401],
@@ -288,7 +296,8 @@ void main() {
       );
     });
 
-    test('evaluate_whenRefresherThrowsAndNotRetryCode_shouldNotCallRefresher', () async {
+    test('evaluate_whenRefresherThrowsAndNotRetryCode_shouldNotCallRefresher',
+        () async {
       final evaluator = TokenRetryEvaluator(
         tokenRefresher: mockTokenRefresher,
         retryCodes: [401],
@@ -309,7 +318,8 @@ void main() {
       verifyNever(() => mockTokenRefresher.refreshToken());
     });
 
-    test('evaluate_whenRefresherThrowsOnExceptionalUri_shouldNotCallRefresher', () async {
+    test('evaluate_whenRefresherThrowsOnExceptionalUri_shouldNotCallRefresher',
+        () async {
       final evaluator = TokenRetryEvaluator(
         tokenRefresher: mockTokenRefresher,
         retryCodes: [401],
@@ -335,7 +345,8 @@ void main() {
       verifyNever(() => mockTokenRefresher.refreshToken());
     });
 
-    test('evaluate_whenRefresherThrowsMultipleTimes_shouldPropagateEachTime', () async {
+    test('evaluate_whenRefresherThrowsMultipleTimes_shouldPropagateEachTime',
+        () async {
       final evaluator = TokenRetryEvaluator(
         tokenRefresher: mockTokenRefresher,
         retryCodes: [401],
@@ -369,7 +380,9 @@ void main() {
       verify(() => mockTokenRefresher.refreshToken()).called(2);
     });
 
-    test('evaluate_whenRefresherSucceedsAfterPreviousException_shouldReturnTrue', () async {
+    test(
+        'evaluate_whenRefresherSucceedsAfterPreviousException_shouldReturnTrue',
+        () async {
       final evaluator = TokenRetryEvaluator(
         tokenRefresher: mockTokenRefresher,
         retryCodes: [401],
@@ -385,7 +398,8 @@ void main() {
       );
 
       // First call throws
-      when(() => mockTokenRefresher.refreshToken()).thenThrow(Exception('First attempt failed'));
+      when(() => mockTokenRefresher.refreshToken())
+          .thenThrow(Exception('First attempt failed'));
 
       // First attempt should throw
       expect(
@@ -394,7 +408,8 @@ void main() {
       );
 
       // Second call succeeds
-      when(() => mockTokenRefresher.refreshToken()).thenAnswer((_) async => true);
+      when(() => mockTokenRefresher.refreshToken())
+          .thenAnswer((_) async => true);
 
       // Second attempt should succeed
       final result = await evaluator.evaluate(exception, 2);

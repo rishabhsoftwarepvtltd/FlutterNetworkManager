@@ -4,7 +4,7 @@
 class PersisterKeys {
   /// Key for storing the access token.
   static const token = "token";
-  
+
   /// Key for storing the refresh token.
   static const refreshToken = "refresh_token";
 }
