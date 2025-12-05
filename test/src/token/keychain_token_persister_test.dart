@@ -12,9 +12,7 @@ void main() {
     tokenPersister = KeyChainTokenPersister(storage: mockSecureStorage);
   });
   group("save:", () {
-    test(
-        "save_whenOnlyTokenProvided_shouldWriteTokenToStorage",
-        () async {
+    test("save_whenOnlyTokenProvided_shouldWriteTokenToStorage", () async {
       String token = "myToken123";
       when(
         () => mockSecureStorage.write(
@@ -28,8 +26,7 @@ void main() {
       verifyNever(() => mockSecureStorage.write(
           key: PersisterKeys.refreshToken, value: any(named: "value")));
     });
-    test(
-        "save_whenOnlyRefreshTokenProvided_shouldWriteRefreshTokenToStorage",
+    test("save_whenOnlyRefreshTokenProvided_shouldWriteRefreshTokenToStorage",
         () async {
       String refreshToken = "myToken123";
       when(
@@ -67,7 +64,8 @@ void main() {
     });
 
     test("token_whenStorageEmpty_shouldReturnNull", () async {
-      when(() => mockSecureStorage.read(key: PersisterKeys.token)).thenAnswer((_) async => null);
+      when(() => mockSecureStorage.read(key: PersisterKeys.token))
+          .thenAnswer((_) async => null);
 
       final token = await tokenPersister.token;
 
@@ -76,7 +74,8 @@ void main() {
   });
 
   group("refreshToken getter", () {
-    test("refreshToken_whenStorageHasRefreshToken_shouldReturnRefreshToken", () async {
+    test("refreshToken_whenStorageHasRefreshToken_shouldReturnRefreshToken",
+        () async {
       const refreshTokenValue = "myRefreshToken123";
       when(() => mockSecureStorage.read(key: PersisterKeys.refreshToken))
           .thenAnswer((_) async => refreshTokenValue);
@@ -84,7 +83,8 @@ void main() {
       final refreshToken = await tokenPersister.refreshToken;
 
       expect(refreshToken, refreshTokenValue);
-      verify(() => mockSecureStorage.read(key: PersisterKeys.refreshToken)).called(1);
+      verify(() => mockSecureStorage.read(key: PersisterKeys.refreshToken))
+          .called(1);
     });
 
     test("refreshToken_whenStorageEmpty_shouldReturnNull", () async {

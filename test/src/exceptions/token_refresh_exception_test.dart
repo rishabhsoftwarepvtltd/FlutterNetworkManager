@@ -82,7 +82,8 @@ void main() {
           reason: RefreshFailureReason.refreshTokenExpired,
         );
 
-        expect(exception.reason, equals(RefreshFailureReason.refreshTokenExpired));
+        expect(
+            exception.reason, equals(RefreshFailureReason.refreshTokenExpired));
       });
 
       test('reason_networkError_shouldBeUsedForConnectionIssues', () {
@@ -187,9 +188,11 @@ void main() {
           reason: RefreshFailureReason.serverError,
         );
 
-        expect(exception.originalError?.type, equals(DioExceptionType.badResponse));
+        expect(exception.originalError?.type,
+            equals(DioExceptionType.badResponse));
         expect(exception.originalError?.response?.statusCode, equals(500));
-        expect(exception.originalError?.message, equals('Server error occurred'));
+        expect(
+            exception.originalError?.message, equals('Server error occurred'));
         expect(
           exception.originalError?.response?.data['error'],
           equals('Database connection failed'),
@@ -214,7 +217,8 @@ void main() {
           reason: RefreshFailureReason.refreshTokenExpired,
         );
 
-        expect(exception.reason, equals(RefreshFailureReason.refreshTokenExpired));
+        expect(
+            exception.reason, equals(RefreshFailureReason.refreshTokenExpired));
         expect(exception.originalError?.response?.statusCode, equals(401));
       });
 
@@ -232,7 +236,8 @@ void main() {
         );
 
         expect(exception.reason, equals(RefreshFailureReason.networkError));
-        expect(exception.originalError?.type, equals(DioExceptionType.connectionTimeout));
+        expect(exception.originalError?.type,
+            equals(DioExceptionType.connectionTimeout));
       });
 
       test('scenario_noRefreshTokenInStorage_shouldHaveCorrectProperties', () {
@@ -267,10 +272,12 @@ void main() {
 
     group('Additional Edge Cases for 100% Coverage', () {
       test('enum_names_shouldBeAccessible', () {
-        expect(RefreshFailureReason.refreshTokenExpired.name, equals('refreshTokenExpired'));
+        expect(RefreshFailureReason.refreshTokenExpired.name,
+            equals('refreshTokenExpired'));
         expect(RefreshFailureReason.networkError.name, equals('networkError'));
         expect(RefreshFailureReason.serverError.name, equals('serverError'));
-        expect(RefreshFailureReason.noRefreshToken.name, equals('noRefreshToken'));
+        expect(
+            RefreshFailureReason.noRefreshToken.name, equals('noRefreshToken'));
         expect(RefreshFailureReason.unknown.name, equals('unknown'));
       });
 
@@ -286,7 +293,8 @@ void main() {
         final exception = TokenRefreshFailedException(longMessage);
 
         expect(exception.message, equals(longMessage));
-        expect(exception.toString(), equals('TokenRefreshFailedException: $longMessage'));
+        expect(exception.toString(),
+            equals('TokenRefreshFailedException: $longMessage'));
       });
 
       test('exception_withSpecialCharactersInMessage_shouldWork', () {
@@ -325,7 +333,8 @@ void main() {
         );
 
         expect(exception.originalError?.response, isNull);
-        expect(exception.originalError?.type, equals(DioExceptionType.connectionTimeout));
+        expect(exception.originalError?.type,
+            equals(DioExceptionType.connectionTimeout));
       });
 
       test('exception_equality_differentInstances_shouldNotBeEqual', () {

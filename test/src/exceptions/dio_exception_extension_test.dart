@@ -4,7 +4,8 @@ import 'package:rspl_network_manager/src/exceptions/dio_exception_extension.dart
 
 void main() {
   group('DioExceptionX', () {
-    test('isInternetConnectionError_whenConnectionTimeout_shouldReturnTrue', () {
+    test('isInternetConnectionError_whenConnectionTimeout_shouldReturnTrue',
+        () {
       final exception = DioException(
         requestOptions: RequestOptions(path: '/test'),
         type: DioExceptionType.connectionTimeout,

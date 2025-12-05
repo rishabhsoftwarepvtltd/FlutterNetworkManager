@@ -39,7 +39,7 @@ class KeyChainTokenPersister implements ITokenPersister {
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
     ),
   }) : _storage = storage;
-  
+
   final FlutterSecureStorage _storage;
 
   @override

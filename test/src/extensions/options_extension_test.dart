@@ -37,19 +37,22 @@ void main() {
     });
 
     test('tokenNotRequired_whenSetToTrue_shouldReturnTrue', () {
-      final requestOptions = RequestOptions(path: '/test')..tokenNotRequired = true;
+      final requestOptions = RequestOptions(path: '/test')
+        ..tokenNotRequired = true;
 
       expect(requestOptions.tokenNotRequired, isTrue);
     });
 
     test('tokenNotRequired_whenSetToFalse_shouldReturnFalse', () {
-      final requestOptions = RequestOptions(path: '/test')..tokenNotRequired = false;
+      final requestOptions = RequestOptions(path: '/test')
+        ..tokenNotRequired = false;
 
       expect(requestOptions.tokenNotRequired, isFalse);
     });
 
     test('tokenNotRequired_whenSet_shouldPersistInExtra', () {
-      final requestOptions = RequestOptions(path: '/test')..tokenNotRequired = true;
+      final requestOptions = RequestOptions(path: '/test')
+        ..tokenNotRequired = true;
 
       expect(requestOptions.extra['token-not-required'], isTrue);
     });

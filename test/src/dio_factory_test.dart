@@ -10,7 +10,7 @@ void main() {
     final dioClient = dioFactory.create();
     expect(dioClient.options.baseUrl, baseUrl);
   });
-  
+
   test("create_whenHeadersProvided_shouldReflectInClientObject", () {
     const tokenValue = "12345";
     const dioFactory = DioFactory("");
@@ -20,7 +20,9 @@ void main() {
     expect(value, tokenValue);
   });
 
-  test("createWithOptions_whenCustomOptionsProvided_shouldCreateDioWithCustomOptions", () {
+  test(
+      "createWithOptions_whenCustomOptionsProvided_shouldCreateDioWithCustomOptions",
+      () {
     const dioFactory = DioFactory("http://example.com");
     final customOptions = BaseOptions(
       baseUrl: "http://custom.com",
@@ -42,8 +44,10 @@ void main() {
   test("create_whenNoParametersProvided_shouldSetDefaultTimeouts", () {
     const dioFactory = DioFactory("http://example.com");
     final dioClient = dioFactory.create();
-    expect(dioClient.options.connectTimeout, const Duration(milliseconds: 5000));
-    expect(dioClient.options.receiveTimeout, const Duration(milliseconds: 15000));
+    expect(
+        dioClient.options.connectTimeout, const Duration(milliseconds: 5000));
+    expect(
+        dioClient.options.receiveTimeout, const Duration(milliseconds: 15000));
     expect(dioClient.options.sendTimeout, const Duration(milliseconds: 15000));
   });
 

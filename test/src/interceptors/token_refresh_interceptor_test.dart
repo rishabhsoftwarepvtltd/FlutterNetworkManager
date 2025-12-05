@@ -38,7 +38,9 @@ void main() {
       expect(wrapper.interceptor, isNotNull);
     });
 
-    test('constructor_whenCustomRetryEvaluatorProvided_shouldUseCustomEvaluator', () {
+    test(
+        'constructor_whenCustomRetryEvaluatorProvided_shouldUseCustomEvaluator',
+        () {
       Future<bool> customEvaluator(DioException error, int attempt) async {
         return true;
       }
@@ -52,7 +54,9 @@ void main() {
       expect(wrapper.interceptor, isNotNull);
     });
 
-    test('constructor_whenNoRetryEvaluatorProvided_shouldUseDefaultTokenRetryEvaluator', () {
+    test(
+        'constructor_whenNoRetryEvaluatorProvided_shouldUseDefaultTokenRetryEvaluator',
+        () {
       final wrapper = TokenRefreshInterceptorWrapper(
         dio: mockDio,
         tokenRefresher: mockTokenRefresher,
