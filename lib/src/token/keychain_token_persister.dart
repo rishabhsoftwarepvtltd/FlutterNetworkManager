@@ -3,12 +3,43 @@ import 'persister_keys.dart';
 
 import 'token_persister.dart';
 
+/// Secure token persister using platform-specific keychain/keystore.
+///
+/// This implementation uses [FlutterSecureStorage] to store tokens securely:
+/// - **iOS/macOS**: Keychain
+/// - **Android**: EncryptedSharedPreferences
+/// - **Web**: Web Crypto API
+///
+/// Tokens are encrypted at rest and only accessible by your app.
+///
+/// Example:
+/// ```dart
+/// final tokenPersister = KeyChainTokenPersister();
+///
+/// // Save tokens
+/// await tokenPersister.save(
+///   token: 'access_token_here',
+///   refreshToken: 'refresh_token_here',
+/// );
+///
+/// // Read tokens
+/// final accessToken = await tokenPersister.token;
+/// final refreshToken = await tokenPersister.refreshToken;
+///
+/// // Remove tokens (e.g., on logout)
+/// await tokenPersister.remove();
+/// ```
 class KeyChainTokenPersister implements ITokenPersister {
+  /// Creates a [KeyChainTokenPersister] with optional custom storage.
+  ///
+  /// By default, uses [FlutterSecureStorage] with encrypted shared preferences
+  /// on Android for maximum security.
   const KeyChainTokenPersister({
     FlutterSecureStorage storage = const FlutterSecureStorage(
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
     ),
   }) : _storage = storage;
+  
   final FlutterSecureStorage _storage;
 
   @override

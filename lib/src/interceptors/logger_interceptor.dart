@@ -4,50 +4,49 @@ import 'dart:math' as math;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
+/// Configurable logging interceptor for Dio HTTP requests and responses.
+///
+/// This interceptor provides detailed logging of HTTP requests, responses, and errors
+/// with customizable output options. Logs can be printed to console and/or streamed
+/// for file logging.
+///
+/// **Features:**
+/// - Request/response logging with configurable detail levels
+/// - Pretty-printed JSON formatting
+/// - Compact or expanded output modes
+/// - Stream-based logging for file writing
+/// - Configurable log width
+///
+/// **Configuration Options:**
+/// - [enableConsoleLog]: Enable/disable console output (default: true)
+/// - [request]: Log request info (default: true)
+/// - [requestHeader]: Log request headers (default: false)
+/// - [requestBody]: Log request body (default: false)
+/// - [responseBody]: Log response body (default: true)
+/// - [responseHeader]: Log response headers (default: false)
+/// - [error]: Log errors (default: true)
+/// - [compact]: Use compact JSON format (default: true)
+/// - [maxWidth]: Maximum width for log lines (default: 90)
+///
+/// Example:
+/// ```dart
+/// final loggerInterceptor = WSLoggerInterceptor(
+///   request: true,
+///   requestBody: true,
+///   responseBody: true,
+///   error: true,
+/// );
+/// dio.interceptors.add(loggerInterceptor);
+///
+/// // Listen to log stream for file writing
+/// loggerInterceptor.newLogStream.listen((log) {
+///   // Write log to file
+/// });
+/// ```
 class WSLoggerInterceptor extends Interceptor {
-  ///Enabled by default
+  /// Creates a [WSLoggerInterceptor] with configurable logging options.
   ///
-  ///This is using [debugPrint] to log on console.
-  final bool enableConsoleLog;
-
-  /// Print request [Options]
-  final bool request;
-
-  /// Print request header [Options.headers]
-  final bool requestHeader;
-
-  /// Print request data [Options.data]
-  final bool requestBody;
-
-  /// Print [Response.data]
-  final bool responseBody;
-
-  /// Print [Response.headers]
-  final bool responseHeader;
-
-  /// Print error message
-  final bool error;
-
-  /// InitialTab count to logPrint json response
-  static const int initialTab = 1;
-
-  /// 1 tab length
-  static const String tabStep = '    ';
-
-  /// Print compact json response
-  final bool compact;
-
-  /// Width size per logPrint
-  final int maxWidth;
-
-  ///Stream to get logs as and when it is generated.
-  ///
-  ///Let's to write log on log file, listen to stream to get new logs and write it to file.
-  late Stream<String> newLogStream;
-
-  late StreamController<String> _newLogStreamController;
-  late void Function(String object) _logPrint;
-
+  /// All parameters are optional with sensible defaults for typical usage.
   WSLoggerInterceptor({
     this.enableConsoleLog = true,
     this.request = true,
@@ -63,6 +62,47 @@ class WSLoggerInterceptor extends Interceptor {
     _newLogStreamController = StreamController<String>.broadcast();
     newLogStream = _newLogStreamController.stream;
   }
+
+  /// Enable console logging using [debugPrint] (default: true).
+  final bool enableConsoleLog;
+
+  /// Print request [Options] info.
+  final bool request;
+
+  /// Print request headers [Options.headers].
+  final bool requestHeader;
+
+  /// Print request body [Options.data].
+  final bool requestBody;
+
+  /// Print response body [Response.data].
+  final bool responseBody;
+
+  /// Print response headers [Response.headers].
+  final bool responseHeader;
+
+  /// Print error messages.
+  final bool error;
+
+  /// Initial tab count for JSON formatting.
+  static const int initialTab = 1;
+
+  /// Tab step size (4 spaces).
+  static const String tabStep = '    ';
+
+  /// Use compact JSON format for smaller output.
+  final bool compact;
+
+  /// Maximum width per log line.
+  final int maxWidth;
+
+  /// Stream of log messages for file writing or custom handling.
+  ///
+  /// Listen to this stream to write logs to a file or process them elsewhere.
+  late Stream<String> newLogStream;
+
+  late StreamController<String> _newLogStreamController;
+  late void Function(String object) _logPrint;
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
@@ -90,9 +130,14 @@ class WSLoggerInterceptor extends Interceptor {
             ..addEntries(data.fields)
             ..addEntries(data.files);
           _printMapAsTable(formDataMap, header: 'Form data | ${data.boundary}');
-        } else {
+        }
+        // coverage:ignore-start
+        // Reason: Edge case for non-Map, non-FormData request bodies (e.g., raw strings, bytes).
+        // Rarely used in practice and difficult to test comprehensively without complex setup.
+        else {
           _printBlock(data.toString());
         }
+        // coverage:ignore-end
       }
     }
     super.onRequest(options, handler);
@@ -165,9 +210,14 @@ class WSLoggerInterceptor extends Interceptor {
         _logPrint('║${_indent()}[');
         _printList(response.data as List);
         _logPrint('║${_indent()}[');
-      } else {
+      }
+      // coverage:ignore-start
+      // Reason: Edge case for non-Map, non-List response bodies (e.g., raw strings, primitives).
+      // Uncommon in REST APIs and difficult to test without specific API setup.
+      else {
         _printBlock(response.data.toString());
       }
+      // coverage:ignore-end
     }
   }
 

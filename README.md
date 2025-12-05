@@ -235,7 +235,12 @@ class MyTokenRefresher implements ITokenRefresher {
     try {
       // 1. Get the refresh token from storage
       final refreshToken = await tokenPersister.refreshToken;
-      if (refreshToken == null) return false;
+      if (refreshToken == null) {
+        throw TokenRefreshFailedException(
+          'No refresh token available',
+          reason: RefreshFailureReason.noRefreshToken,
+        );
+      }
 
       // 2. Call your backend's refresh endpoint
       // Note: We use the same Dio instance, but the 'TokenRetryEvaluator' 
@@ -252,13 +257,64 @@ class MyTokenRefresher implements ITokenRefresher {
         );
         return true; // Success!
       }
-      return false;
+      
+      throw TokenRefreshFailedException(
+        'Invalid response from refresh endpoint',
+        reason: RefreshFailureReason.serverError,
+      );
+    } on TokenRefreshFailedException {
+      rethrow; // Re-throw our custom exception
+    } on DioException catch (e) {
+      // Determine failure reason based on error type
+      RefreshFailureReason reason;
+      if (e.response?.statusCode == 401 || e.response?.statusCode == 403) {
+        reason = RefreshFailureReason.refreshTokenExpired;
+      } else {
+        reason = RefreshFailureReason.networkError;
+      }
+      
+      throw TokenRefreshFailedException(
+        'Token refresh failed: ${e.message}',
+        originalError: e,
+        reason: reason,
+      );
     } catch (e) {
-      return false; // Failed
+      throw TokenRefreshFailedException(
+        'Unexpected error during token refresh',
+        reason: RefreshFailureReason.unknown,
+      );
     }
   }
 }
 ```
+
+**Handling Token Refresh Failures:**
+
+You can catch `TokenRefreshFailedException` to handle refresh failures specifically:
+
+```dart
+try {
+  final response = await dio.get('/api/profile');
+} on TokenRefreshFailedException catch (e) {
+  // Token refresh failed - handle specifically
+  print('Refresh failed: ${e.message}');
+  print('Reason: ${e.reason}');
+  
+  // Force logout if refresh token expired
+  if (e.reason == RefreshFailureReason.refreshTokenExpired) {
+    navigateToLogin();
+  }
+} on DioException catch (e) {
+  // Handle other network errors
+  print('Request failed: ${e.message}');
+}
+```
+
+The exception provides:
+- **`message`**: Human-readable error description
+- **`reason`**: Categorized failure type (`refreshTokenExpired`, `networkError`, `serverError`, `noRefreshToken`, `unknown`)
+- **`originalError`**: The underlying `DioException` if available
+
 
 ---
 

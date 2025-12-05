@@ -62,6 +62,11 @@ class DioFactory {
         headers: {},
       );
 
+  // coverage:ignore-start
+  // Reason: Platform-specific code using IOHttpClientAdapter which is only available
+  // on native platforms (iOS, Android, macOS, Windows, Linux). Standard Flutter tests
+  // run in a VM environment that doesn't support IOHttpClientAdapter, making this
+  // code impossible to test without complex platform-specific test setup.
   void _setupProxy(Dio dio, ProxyConfig proxyConfig) {
     (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
       final HttpClient client = HttpClient();
@@ -71,4 +76,5 @@ class DioFactory {
       return client;
     };
   }
+  // coverage:ignore-end
 }

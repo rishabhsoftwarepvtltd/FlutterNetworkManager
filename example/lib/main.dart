@@ -232,6 +232,16 @@ class _JWTDemoPageState extends State<JWTDemoPage> {
         setState(() => _profileData = data);
         _addLog('Profile loaded successfully', LogType.success);
       }
+    } on TokenRefreshFailedException catch (e) {
+      // Handle token refresh failure specifically
+      _addLog('Token refresh failed: ${e.message}', LogType.error);
+      _addLog('Reason: ${e.reason.name}', LogType.error);
+
+      // Force logout when refresh token expires
+      if (e.reason == RefreshFailureReason.refreshTokenExpired) {
+        _addLog('Refresh token expired - logging out', LogType.warning);
+        await _logout();
+      }
     } on DioException catch (e) {
       if (e.isInternetConnectionError) {
         _addLog('No internet connection', LogType.error);
@@ -664,7 +674,10 @@ class _CustomTokenRefresher implements ITokenRefresher {
 
       if (refreshToken == null || refreshToken.isEmpty) {
         onLog('No refresh token available', LogType.error);
-        return false;
+        throw TokenRefreshFailedException(
+          'No refresh token available in storage',
+          reason: RefreshFailureReason.noRefreshToken,
+        );
       }
 
       // Call refresh endpoint using dedicated Dio instance
@@ -692,13 +705,39 @@ class _CustomTokenRefresher implements ITokenRefresher {
       }
 
       onLog('Token refresh failed: Invalid response', LogType.error);
-      return false;
+      throw TokenRefreshFailedException(
+        'Server returned invalid response during token refresh',
+        reason: RefreshFailureReason.serverError,
+      );
+    } on TokenRefreshFailedException {
+      // Re-throw our custom exception
+      rethrow;
     } on DioException catch (e) {
       onLog('Token refresh failed: ${e.message}', LogType.error);
-      return false;
+      
+      // Determine the failure reason based on the error
+      RefreshFailureReason reason;
+      if (e.response?.statusCode == 401 || e.response?.statusCode == 403) {
+        reason = RefreshFailureReason.refreshTokenExpired;
+      } else if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.receiveTimeout ||
+          e.type == DioExceptionType.sendTimeout) {
+        reason = RefreshFailureReason.networkError;
+      } else {
+        reason = RefreshFailureReason.serverError;
+      }
+
+      throw TokenRefreshFailedException(
+        'Token refresh failed: ${e.message ?? "Unknown error"}',
+        originalError: e,
+        reason: reason,
+      );
     } catch (e) {
       onLog('Token refresh error: $e', LogType.error);
-      return false;
+      throw TokenRefreshFailedException(
+        'Unexpected error during token refresh: $e',
+        reason: RefreshFailureReason.unknown,
+      );
     }
   }
 }

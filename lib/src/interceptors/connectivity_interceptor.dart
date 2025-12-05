@@ -3,12 +3,31 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 
+/// Interceptor that checks internet connectivity before making network requests.
+///
+/// This interceptor monitors the device's connectivity status and rejects
+/// requests when there is no internet connection, preventing unnecessary
+/// network calls and providing immediate feedback.
+///
+/// Example:
+/// ```dart
+/// final connectivityInterceptor = ConnectivityInterceptor();
+/// dio.interceptors.add(connectivityInterceptor);
+/// ```
+///
+/// When there's no internet connection, requests will fail with:
+/// - Type: [DioExceptionType.connectionTimeout]
+/// - Error: "no_internet_connectivity"
 class ConnectivityInterceptor extends Interceptor {
-  ///Will automatically initialize [Connectivity] if not provided by caller.
+  /// Creates a [ConnectivityInterceptor] instance.
+  ///
+  /// Optionally accepts a [Connectivity] instance for testing purposes.
+  /// If not provided, a new [Connectivity] instance will be created automatically.
   ConnectivityInterceptor({Connectivity? connectivity}) {
     _connectivity = connectivity ?? Connectivity();
     _listenConnectionStatus();
   }
+  
   late final Connectivity _connectivity;
   late final StreamSubscription<List<ConnectivityResult>> subscription;
   ConnectivityResult? _connectionResult;

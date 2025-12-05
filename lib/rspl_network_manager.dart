@@ -36,6 +36,7 @@ library;
 export 'package:rspl_network_manager/src/dio_factory.dart';
 export 'package:rspl_network_manager/src/exceptions/dio_exception_extension.dart';
 export 'package:rspl_network_manager/src/exceptions/network_exceptions.dart';
+export 'package:rspl_network_manager/src/exceptions/token_refresh_exception.dart';
 export 'package:rspl_network_manager/src/interceptors/connectivity_interceptor.dart';
 export 'package:rspl_network_manager/src/interceptors/logger_interceptor.dart';
 export 'package:rspl_network_manager/src/interceptors/mock_api_interceptor.dart';
