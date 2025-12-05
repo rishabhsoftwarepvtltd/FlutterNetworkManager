@@ -57,6 +57,15 @@ It abstracts away common boilerplate code associated with HTTP clients, offering
 - **Flutter**: Flutter 3.24.0+
 - **Dio**: ^5.0.0
 
+### Build Requirements
+
+- **Android**: 
+  - Gradle 8.5+ (for Java 17+ compatibility)
+  - Java 17 or higher (Java 22 recommended)
+  - Android Gradle Plugin 8.1.4+
+  - Kotlin 1.9.0+
+- **iOS/macOS**: Xcode 14.0+
+
 ### Permissions
 
 - **Android**: Add `INTERNET` permission in `AndroidManifest.xml`.
@@ -94,7 +103,7 @@ Add the dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  rspl_network_manager: ^0.0.1
+  rspl_network_manager: ^0.0.2
 ```
 
 Then run:
