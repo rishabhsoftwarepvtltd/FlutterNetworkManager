@@ -1,12 +1,12 @@
 # RSPL Network Manager
 [![pub package](https://img.shields.io/pub/v/rspl_network_manager.svg)](https://pub.dev/packages/rspl_network_manager)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: Rishabh Software](https://img.shields.io/badge/License-Rishabh%20Software-blue.svg)](LICENSE)
 [![Flutter](https://img.shields.io/badge/Flutter-3.24.0%2B-02569B.svg?logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.5.0%2B-0175C2.svg?logo=dart&logoColor=white)](https://dart.dev)
 [![Coverage](https://img.shields.io/badge/coverage-87%25-success.svg)](https://github.com/rishabhsoftwarepvtltd/FlutterNetworkManager)
 [![Platform](https://img.shields.io/badge/platform-android%20|%20ios%20|%20macos%20|%20web-blue.svg)](https://pub.dev/packages/rspl_network_manager)
 
-`RSPLNetworkManager` is a production-ready networking wrapper for Flutter apps, built on top of [Dio](https://pub.dev/packages/dio). It simplifies HTTP requests with built-in logging, token management, offline support, and automatic token refreshing.
+This is a production-ready networking wrapper for Flutter apps, built on top of [Dio](https://pub.dev/packages/dio). It simplifies HTTP requests with built-in logging, token management, offline support, and automatic token refreshing.
 
 It abstracts away common boilerplate code associated with HTTP clients, offering a clean API for handling authentication, logging, error handling, and connectivity states.
 
@@ -103,7 +103,7 @@ Add the dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  rspl_network_manager: ^0.0.2
+  rspl_network_manager: ^1.0.0
 ```
 
 Then run:
@@ -437,7 +437,7 @@ rspl_network_manager/
 ├─ example/                       # Complete example app
 ├─ test/                          # Unit tests
 ├─ CHANGELOG.md                   # Version history
-├─ LICENSE                        # MIT License
+├─ LICENSE                        # Rishabh Software Source Available License
 └─ README.md                      # Documentation
 ```
 
@@ -480,8 +480,22 @@ Run checks before push:
 
 ## License
 
-This package is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+This package is licensed under the **Rishabh Software Source Available License (Non-Commercial) V.1**.
 
-## Made by RSPL Team
+- ✅ Free for personal projects, learning, academic purposes, and evaluation
+- ✅ You may modify and fork for non-commercial use
+- ❌ Commercial use requires a separate license
+
+For licensing inquiries, refer to [LICENSE](LICENSE) for contact details.
+
+## Made by Rishabh Software Team
 
 [Github](https://github.com/rishabhsoftwarepvtltd) • [Website](https://www.rishabhsoft.com/services/mobile-app-development)
+
+## Contact
+
+Have questions, suggestions, or feedback? We'd love to hear from you!
+
+📧 **Email**: [opensource@rishabhsoft.com](mailto:opensource@rishabhsoft.com)
+
+🌐 **Contact Us**: https://www.rishabhsoft.com/contact-us

@@ -1,10 +1,10 @@
 name: rspl_network_manager
 description: A Flutter plugin that simplifies networking with configurable logging, token persistence, mock API support, automatic token refresh, connectivity checks, and proxy configuration.
-version: 0.0.2
+version: 1.0.0
 homepage: https://github.com/rishabhsoftwarepvtltd/FlutterNetworkManager
 repository: https://github.com/rishabhsoftwarepvtltd/FlutterNetworkManager
 issue_tracker: https://github.com/rishabhsoftwarepvtltd/FlutterNetworkManager/issues
-license: MIT
+license: LicenseRef-Rishabh-Software-Non-Commercial-1.0
 
 environment:
   sdk: ">=3.5.0 <4.0.0"
