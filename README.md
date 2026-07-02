@@ -1,8 +1,8 @@
 # RSPL Network Manager
 [![pub package](https://img.shields.io/pub/v/rspl_network_manager.svg)](https://pub.dev/packages/rspl_network_manager)
 [![License: Rishabh Software](https://img.shields.io/badge/License-Rishabh%20Software-blue.svg)](LICENSE)
-[![Flutter](https://img.shields.io/badge/Flutter-3.24.0%2B-02569B.svg?logo=flutter&logoColor=white)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/Dart-3.5.0%2B-0175C2.svg?logo=dart&logoColor=white)](https://dart.dev)
+[![Flutter](https://img.shields.io/badge/Flutter-3.35.0%2B-02569B.svg?logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-3.9.0%2B-0175C2.svg?logo=dart&logoColor=white)](https://dart.dev)
 [![Coverage](https://img.shields.io/badge/coverage-87%25-success.svg)](https://github.com/rishabhsoftwarepvtltd/FlutterNetworkManager)
 [![Platform](https://img.shields.io/badge/platform-android%20|%20ios%20|%20macos%20|%20web-blue.svg)](https://pub.dev/packages/rspl_network_manager)
 
@@ -43,9 +43,9 @@ It abstracts away common boilerplate code associated with HTTP clients, offering
 
 ## Platform Support
 
-- **Android** — API Level: 21+
-- **iOS** — iOS 12.0+
-- **macOS** — macOS 10.14+
+- **Android** — API Level: 23+ (required by `flutter_secure_storage` v10)
+- **iOS** — iOS 13.0+
+- **macOS** — macOS 10.15+
 - **Web** — All modern browsers
 
 > [!NOTE]
@@ -53,18 +53,18 @@ It abstracts away common boilerplate code associated with HTTP clients, offering
 
 ## Requirements
 
-- **Dart**: >=3.5.0 <4.0.0
-- **Flutter**: Flutter 3.24.0+
-- **Dio**: ^5.0.0
+- **Dart**: ^3.9.0
+- **Flutter**: Flutter 3.35.0+ (Dart 3.9 ships with Flutter 3.35)
+- **Dio**: ^5.10.0
 
 ### Build Requirements
 
 - **Android**: 
-  - Gradle 8.5+ (for Java 17+ compatibility)
-  - Java 17 or higher (Java 22 recommended)
-  - Android Gradle Plugin 8.1.4+
-  - Kotlin 1.9.0+
-- **iOS/macOS**: Xcode 14.0+
+  - Gradle 8.8+ (Gradle 8.14.3 recommended; required for Java 17/21/22 compatibility)
+  - Java 17 or higher (Java 21/22 recommended)
+  - Android Gradle Plugin 8.9.1+ (required for compileSdk 36, used by `flutter_secure_storage` v10)
+  - Kotlin 2.1.0+ (or Flutter's built-in Kotlin)
+- **iOS/macOS**: Xcode 16.0+
 
 ### Permissions
 
@@ -87,7 +87,7 @@ This package relies on the following core dependencies. Please review their docu
 
 #### flutter_secure_storage
 - **macOS**: You must add the `Keychain Sharing` capability in Xcode and enable `keychain-access-groups` in your entitlements file (as shown in the example app).
-- **Android**: Can be configured to use `EncryptedSharedPreferences`.
+- **Android**: As of v10, data is encrypted with the plugin's own ciphers (the deprecated `EncryptedSharedPreferences` option was removed); existing data is migrated automatically on first access. Requires `minSdk 23`.
 
 #### connectivity_plus
 - **Android**: Uses `ConnectivityManager`. Ensure `ACCESS_NETWORK_STATE` permission is in your manifest (usually added automatically).
