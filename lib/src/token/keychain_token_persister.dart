@@ -32,12 +32,11 @@ import 'token_persister.dart';
 class KeyChainTokenPersister implements ITokenPersister {
   /// Creates a [KeyChainTokenPersister] with optional custom storage.
   ///
-  /// By default, uses [FlutterSecureStorage] with encrypted shared preferences
-  /// on Android for maximum security.
+  /// By default, uses [FlutterSecureStorage], which encrypts values at rest
+  /// on all supported platforms (Keychain on iOS/macOS, encrypted storage
+  /// on Android).
   const KeyChainTokenPersister({
-    FlutterSecureStorage storage = const FlutterSecureStorage(
-      aOptions: AndroidOptions(encryptedSharedPreferences: true),
-    ),
+    FlutterSecureStorage storage = const FlutterSecureStorage(),
   }) : _storage = storage;
 
   final FlutterSecureStorage _storage;
