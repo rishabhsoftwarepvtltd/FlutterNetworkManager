@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0]
+
+### ⚠️ BREAKING CHANGE: Dependency Upgrades
+- **flutter_secure_storage:** Upgraded from `^9.2.4` to `^10.3.1` (major version bump).
+  - The deprecated `AndroidOptions(encryptedSharedPreferences: true)` option was removed from `KeyChainTokenPersister`'s default storage; v10 encrypts data with custom ciphers on Android and migrates existing data automatically on first access.
+  - If you pass a custom `FlutterSecureStorage` instance, review the [flutter_secure_storage v10 migration notes](https://pub.dev/packages/flutter_secure_storage/changelog).
+
+### Changed
+- Raised minimum Dart SDK requirement to `^3.9.0`.
+- Upgraded `dio` to `^5.10.0`.
+- Upgraded `connectivity_plus` to `^7.2.0`.
+- Verified compatibility with the latest stable Flutter SDK (3.44.x / Dart 3.12).
+
+---
+
 ## [1.0.0]
 
 ### ⚠️ BREAKING CHANGE: License Update
